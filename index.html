@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -31,27 +32,80 @@
         .accent { color: #14b8a6; }
         .accent-bg { background-color: #14b8a6; }
         .accent-border { border-color: #14b8a6; }
+
+        /* ── Mobile sidebar drawer ─────────────────────────────────────── */
+        #sidebar { transition: transform 0.3s ease-in-out; }
+        @media (max-width: 767px) {
+            #sidebar {
+                position: fixed;
+                inset: 0 auto 0 0;
+                z-index: 50;
+                transform: translateX(-100%);
+                width: 85vw;
+                max-width: 320px;
+            }
+            #sidebar.open { transform: translateX(0); }
+            #sidebar-overlay {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.6);
+                z-index: 40;
+            }
+            #sidebar-overlay.open { display: block; }
+            /* Comfortable minimum touch target size on small screens */
+            .nav-link { min-height: 44px; display: flex; align-items: center; }
+            .rollup-header { min-height: 48px; }
+        }
     </style>
 </head>
 <body class="antialiased flex h-screen overflow-hidden">
 
-<!-- ─── Sidebar ─────────────────────────────────────────────────────────── -->
-<aside class="w-72 flex-shrink-0 bg-zinc-950 border-r border-zinc-800 flex flex-col h-full">
+<!-- ─── Mobile top bar ─────────────────────────────────────────────────── -->
+<div class="md:hidden fixed top-0 inset-x-0 z-30 h-14 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between px-3">
+    <button id="sidebar-toggle" aria-label="Open navigation menu" aria-expanded="false" class="p-2 -ml-1 text-zinc-300 hover:text-white active:bg-zinc-800 rounded-md">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/>
+        </svg>
+    </button>
+    <h1 class="text-base font-bold text-white tracking-tight flex items-center gap-1.5">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-teal-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+        </svg>
+        GracePencil
+    </h1>
+    <a href="https://3djps360.gumroad.com" target="_blank" aria-label="Get GracePencil" class="p-2 -mr-1 text-teal-400">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+    </a>
+</div>
 
-    <div class="p-6 border-b border-zinc-800">
-        <h1 class="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
-            <!-- Pencil icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-teal-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
-            </svg>
-            GracePencil
-        </h1>
-        <p class="text-xs text-zinc-400 mt-1">Official Documentation</p>
-        <div class="mt-3 inline-flex items-center rounded-md bg-teal-500/10 px-2 py-1 text-xs font-medium text-teal-400 ring-1 ring-inset ring-teal-500/20">
-            3ds Max 2017 – 2027+
+<!-- Overlay for mobile drawer -->
+<div id="sidebar-overlay"></div>
+
+<!-- ─── Sidebar ─────────────────────────────────────────────────────────── -->
+<aside id="sidebar" class="w-72 flex-shrink-0 bg-zinc-950 border-r border-zinc-800 flex flex-col h-full">
+
+    <div class="p-6 border-b border-zinc-800 flex items-start justify-between gap-2">
+        <div>
+            <h1 class="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-teal-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                </svg>
+                GracePencil
+            </h1>
+            <p class="text-xs text-zinc-400 mt-1">Official Documentation</p>
+            <div class="mt-3 inline-flex items-center rounded-md bg-teal-500/10 px-2 py-1 text-xs font-medium text-teal-400 ring-1 ring-inset ring-teal-500/20">
+                3ds Max 2017 – 2027+
+            </div>
         </div>
+        <button id="sidebar-close" aria-label="Close navigation menu" class="md:hidden p-2 -mt-1 -mr-1 text-zinc-400 hover:text-white active:bg-zinc-800 rounded-md">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </div>
+
+    <div class="px-6">
         <a href="https://3djps360.gumroad.com" target="_blank"
-           class="mt-4 flex items-center justify-center gap-2 w-full bg-teal-500 hover:bg-teal-400 text-zinc-900 font-bold py-2 px-4 rounded transition-colors">
+           class="mt-4 flex items-center justify-center gap-2 w-full bg-teal-500 hover:bg-teal-400 text-zinc-900 font-bold py-3 md:py-2 px-4 rounded transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
             Get GracePencil
         </a>
@@ -75,27 +129,27 @@
 
     <div class="p-4 border-t border-zinc-800 bg-zinc-950/80">
         <p class="text-xs font-semibold text-zinc-500 mb-3 uppercase tracking-wider">Connect &amp; Support</p>
-        <div class="flex flex-wrap gap-3">
-            <a href="https://buymeacoffee.com/mostafa_ahmed360" target="_blank" title="Buy Me A Coffee" class="text-zinc-400 hover:text-[#FFDD00] transition-colors"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.216 10.339c-.048-.718-.538-1.28-1.246-1.428l-3.32-.693-1.042-3.805a1.49 1.49 0 0 0-1.423-1.096H6.108a1.5 1.5 0 0 0-1.455 1.137l-1.85 7.427a1.49 1.49 0 0 0 .524 1.533A1.494 1.494 0 0 0 4.2 13.88h3.916l-1.066 3.896a1.5 1.5 0 0 0 .584 1.58A1.49 1.49 0 0 0 8.5 19.5h7.077c.692 0 1.298-.475 1.45-1.144l1.454-6.402h2.247c.571 0 1.05-.411 1.135-.975l.353-2.64z"/></svg></a>
-            <a href="https://www.youtube.com/@JOKERPRODUCTION-" target="_blank" title="YouTube" class="text-zinc-400 hover:text-[#FF0000] transition-colors"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
-            <a href="https://www.artstation.com/jokerproduction360" target="_blank" title="ArtStation" class="text-zinc-400 hover:text-[#13AFF0] transition-colors"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M2.08 17.514L.982 19.46a.359.359 0 0 0 .048.406c.094.108.232.164.382.164h17.155c.164 0 .315-.078.403-.207.086-.129.112-.294.067-.442l-1.956-6.425H6.26l-4.18 4.558zm12.632-15.11a.417.417 0 0 0-.361-.205H9.664a.423.423 0 0 0-.372.219L4.015 11.603h12.39L14.712 2.404zm5.006 8.528H18.06l3.35 11.002h1.666a.419.419 0 0 0 .37-.215l.504-.881a.413.413 0 0 0-.012-.423L19.72 10.932z"/></svg></a>
-            <a href="https://www.instagram.com/mostafa_ahmed360/" target="_blank" title="Instagram" class="text-zinc-400 hover:text-[#E1306C] transition-colors"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-            <a href="https://www.facebook.com/mostafa.ahmed360" target="_blank" title="Facebook" class="text-zinc-400 hover:text-[#1877F2] transition-colors"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-            <a href="https://x.com/mostafa_ahme360" target="_blank" title="X (Twitter)" class="text-zinc-400 hover:text-white transition-colors"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <div class="flex flex-wrap gap-4">
+            <a href="https://buymeacoffee.com/mostafa_ahmed360" target="_blank" title="Buy Me A Coffee" class="text-zinc-400 hover:text-[#FFDD00] transition-colors p-1.5 -m-1.5"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.216 10.339c-.048-.718-.538-1.28-1.246-1.428l-3.32-.693-1.042-3.805a1.49 1.49 0 0 0-1.423-1.096H6.108a1.5 1.5 0 0 0-1.455 1.137l-1.85 7.427a1.49 1.49 0 0 0 .524 1.533A1.494 1.494 0 0 0 4.2 13.88h3.916l-1.066 3.896a1.5 1.5 0 0 0 .584 1.58A1.49 1.49 0 0 0 8.5 19.5h7.077c.692 0 1.298-.475 1.45-1.144l1.454-6.402h2.247c.571 0 1.05-.411 1.135-.975l.353-2.64z"/></svg></a>
+            <a href="https://www.youtube.com/@JOKERPRODUCTION-" target="_blank" title="YouTube" class="text-zinc-400 hover:text-[#FF0000] transition-colors p-1.5 -m-1.5"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+            <a href="https://www.artstation.com/jokerproduction360" target="_blank" title="ArtStation" class="text-zinc-400 hover:text-[#13AFF0] transition-colors p-1.5 -m-1.5"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M2.08 17.514L.982 19.46a.359.359 0 0 0 .048.406c.094.108.232.164.382.164h17.155c.164 0 .315-.078.403-.207.086-.129.112-.294.067-.442l-1.956-6.425H6.26l-4.18 4.558zm12.632-15.11a.417.417 0 0 0-.361-.205H9.664a.423.423 0 0 0-.372.219L4.015 11.603h12.39L14.712 2.404zm5.006 8.528H18.06l3.35 11.002h1.666a.419.419 0 0 0 .37-.215l.504-.881a.413.413 0 0 0-.012-.423L19.72 10.932z"/></svg></a>
+            <a href="https://www.instagram.com/mostafa_ahmed360/" target="_blank" title="Instagram" class="text-zinc-400 hover:text-[#E1306C] transition-colors p-1.5 -m-1.5"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+            <a href="https://www.facebook.com/mostafa.ahmed360" target="_blank" title="Facebook" class="text-zinc-400 hover:text-[#1877F2] transition-colors p-1.5 -m-1.5"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+            <a href="https://x.com/mostafa_ahme360" target="_blank" title="X (Twitter)" class="text-zinc-400 hover:text-white transition-colors p-1.5 -m-1.5"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
         </div>
     </div>
 </aside>
 
 <!-- ─── Main Content ──────────────────────────────────────────────────────── -->
-<main class="flex-1 overflow-y-auto bg-zinc-900 scroll-smooth">
-<div class="max-w-5xl mx-auto px-8 py-12 space-y-20">
+<main class="flex-1 overflow-y-auto bg-zinc-900 scroll-smooth pt-14 md:pt-0">
+<div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 py-8 md:py-12 space-y-14 md:space-y-20">
 
 <!-- ══════════════════════════════════════════════════════════════════════ -->
 <!-- INTRODUCTION                                                          -->
 <!-- ══════════════════════════════════════════════════════════════════════ -->
 <section id="introduction" class="space-y-6">
-    <h2 class="text-4xl font-bold text-white tracking-tight">Grease-Pencil Style Drawing for 3ds Max</h2>
-    <p class="text-lg text-zinc-300 leading-relaxed">
+    <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">Grease-Pencil Style Drawing for 3ds Max</h2>
+    <p class="text-base sm:text-lg text-zinc-300 leading-relaxed">
         <strong>GracePencil</strong> is a native C++ plugin for Autodesk 3ds Max that brings a complete
         Blender-Grease-Pencil–inspired 2D/3D drawing system directly into the Max viewport.
         It lives as a standard scene object — draw on any plane in 3D space, build frame-by-frame animation,
@@ -115,7 +169,6 @@
             <p class="text-xs text-zinc-400">Keyframes, onion skinning, auto-key, layer interpolation/tween, and animated layer transforms.</p>
         </div>
         <div class="bg-zinc-800/80 border border-teal-500/20 p-4 rounded-xl flex flex-col gap-2">
-            <!-- Pen tablet icon -->
             <svg class="w-6 h-6 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <rect x="2" y="4" width="20" height="14" rx="2"/>
                 <circle cx="18" cy="7" r="1" fill="currentColor"/>
@@ -156,12 +209,11 @@
 <!-- USE CASES                                                             -->
 <!-- ══════════════════════════════════════════════════════════════════════ -->
 <section id="use-cases" class="space-y-6 pt-8 border-t border-zinc-800">
-    <h2 class="text-2xl font-semibold text-white">Use Cases &amp; Creative Applications</h2>
+    <h2 class="text-xl sm:text-2xl font-semibold text-white">Use Cases &amp; Creative Applications</h2>
     <p class="text-zinc-400">GracePencil is not a single-purpose tool — it fills a wide range of roles depending on your pipeline and artistic goals.</p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-        <!-- Pre-production & Planning -->
         <div class="bg-zinc-800 rounded-xl border border-zinc-700 overflow-hidden">
             <div class="bg-gradient-to-r from-teal-900/40 to-zinc-800 px-5 py-4 flex items-center gap-3 border-b border-zinc-700">
                 <svg class="w-6 h-6 text-teal-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
@@ -177,7 +229,6 @@
             </div>
         </div>
 
-        <!-- 2D Animation in 3D Space -->
         <div class="bg-zinc-800 rounded-xl border border-zinc-700 overflow-hidden">
             <div class="bg-gradient-to-r from-teal-900/40 to-zinc-800 px-5 py-4 flex items-center gap-3 border-b border-zinc-700">
                 <svg class="w-6 h-6 text-teal-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -194,7 +245,6 @@
             </div>
         </div>
 
-        <!-- Stylized 2D+3D hybrid -->
         <div class="bg-zinc-800 rounded-xl border border-zinc-700 overflow-hidden">
             <div class="bg-gradient-to-r from-teal-900/40 to-zinc-800 px-5 py-4 flex items-center gap-3 border-b border-zinc-700">
                 <svg class="w-6 h-6 text-teal-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm10 0a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zm10 0a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"/></svg>
@@ -211,7 +261,6 @@
             </div>
         </div>
 
-        <!-- Concept art & Storyboarding -->
         <div class="bg-zinc-800 rounded-xl border border-zinc-700 overflow-hidden">
             <div class="bg-gradient-to-r from-teal-900/40 to-zinc-800 px-5 py-4 flex items-center gap-3 border-b border-zinc-700">
                 <svg class="w-6 h-6 text-teal-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
@@ -227,7 +276,6 @@
             </div>
         </div>
 
-        <!-- Tablet workflow -->
         <div class="bg-zinc-800 rounded-xl border border-zinc-700 overflow-hidden md:col-span-2">
             <div class="bg-gradient-to-r from-teal-900/40 to-zinc-800 px-5 py-4 flex items-center gap-3 border-b border-zinc-700">
                 <svg class="w-6 h-6 text-teal-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -261,7 +309,7 @@
 <!-- SUB-OBJECT LEVEL                                                      -->
 <!-- ══════════════════════════════════════════════════════════════════════ -->
 <section id="sub-object" class="space-y-6 pt-8 border-t border-zinc-800">
-    <h2 class="text-2xl font-semibold text-white">Sub-Object Level</h2>
+    <h2 class="text-xl sm:text-2xl font-semibold text-white">Sub-Object Level</h2>
     <p class="text-zinc-400">GracePencil exposes a sub-object level in the 3ds Max modifier stack, giving you access to the underlying stroke geometry for selection and transformation — exactly like working with an Editable Spline or Poly.</p>
 
     <div class="bg-teal-500/10 border border-teal-500/20 rounded-xl p-5 text-sm text-zinc-300">
@@ -338,10 +386,9 @@
 <!-- 1. GRACE TOOLS                                                        -->
 <!-- ══════════════════════════════════════════════════════════════════════ -->
 <section id="grace-tools" class="space-y-6 pt-8 border-t border-zinc-800">
-    <h2 class="text-2xl font-semibold text-white">1. Grace Tools <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
+    <h2 class="text-xl sm:text-2xl font-semibold text-white">1. Grace Tools <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
     <p class="text-zinc-400">The main drawing tools rollup. All primary interaction modes live here.</p>
 
-    <!-- Tools Row -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700">
             <h3 class="text-lg font-medium text-white mb-4">Drawing Tools</h3>
@@ -383,7 +430,6 @@
 
         <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700 space-y-5">
 
-            <!-- Bucket Fill -->
             <div>
                 <h3 class="text-base font-semibold text-white mb-2">Bucket Fill</h3>
                 <div class="text-sm text-zinc-300 space-y-1">
@@ -391,7 +437,6 @@
                 </div>
             </div>
 
-            <!-- Erase sub-options -->
             <div>
                 <h3 class="text-base font-semibold text-white mb-2">Erase Options</h3>
                 <div class="text-sm text-zinc-300 space-y-2">
@@ -403,7 +448,6 @@
                 </div>
             </div>
 
-            <!-- Shape Drawer -->
             <div>
                 <h3 class="text-base font-semibold text-white mb-2">Shape Drawer</h3>
                 <div class="text-sm text-zinc-300 space-y-1">
@@ -414,7 +458,6 @@
                 </div>
             </div>
 
-            <!-- Tool Scope -->
             <div class="bg-teal-500/10 border border-teal-500/20 rounded-lg p-4">
                 <h3 class="text-base font-semibold text-teal-400 mb-2">Tool Scope</h3>
                 <p class="text-sm text-zinc-300"><span class="param-badge">All Layers</span> — Smudge, Relax, and Erase affect every visible, unlocked layer simultaneously.<br>
@@ -428,7 +471,7 @@
 <!-- 2. DRAW OPTIONS                                                       -->
 <!-- ══════════════════════════════════════════════════════════════════════ -->
 <section id="draw-options" class="space-y-6 pt-8 border-t border-zinc-800">
-    <h2 class="text-2xl font-semibold text-white">2. Draw Options <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
+    <h2 class="text-xl sm:text-2xl font-semibold text-white">2. Draw Options <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
     <p class="text-zinc-400">Controls the 3D plane on which strokes are painted. Every stroke is recorded in world-space on a plane you define here.</p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -475,13 +518,11 @@
 <!-- 3. BRUSH & COLORS                                                     -->
 <!-- ══════════════════════════════════════════════════════════════════════ -->
 <section id="brush-colors" class="space-y-6 pt-8 border-t border-zinc-800">
-    <h2 class="text-2xl font-semibold text-white">3. Brush &amp; Colors <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
+    <h2 class="text-xl sm:text-2xl font-semibold text-white">3. Brush &amp; Colors <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
     <p class="text-zinc-400">Every aspect of how strokes look and feel — from pixel width to custom Photoshop stamp brushes.</p>
 
-    <!-- Brush type accordion -->
     <div id="brush-sections" class="space-y-3"></div>
 
-    <!-- Static cards for less complex sections -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
 
         <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700 space-y-3">
@@ -517,7 +558,7 @@
                 <div class="space-y-1">
                     <p><span class="param-badge">Pick…</span> — Opens the 3ds Max material browser to select any BitmapTex as the stamp image.</p>
                     <p><span class="param-badge">X (Clear)</span> — Removes the current stamp map and resets to solid-stroke rendering.</p>
-                    <p><span class="param-badge">Import .abr</span> — Opens the Photoshop brush importer. Parses the .abr file, shows a progress bar with a Cancel button, and saves all extracted PNG stamps to <code class="text-teal-400 bg-zinc-900 px-1 rounded">%TEMP%\MaxPencil\&lt;name&gt;_brushes\</code> so they persist between sessions.</p>
+                    <p><span class="param-badge">Import .abr</span> — Opens the Photoshop brush importer. Parses the .abr file, shows a progress bar with a Cancel button, and saves all extracted PNG stamps to <code class="text-teal-400 bg-zinc-900 px-1 rounded break-all">%TEMP%\MaxPencil\&lt;name&gt;_brushes\</code> so they persist between sessions.</p>
                     <p><span class="param-badge">Map name label</span> — Shows the filename of the active stamp map.</p>
                 </div>
                 <div class="space-y-1">
@@ -549,7 +590,7 @@
 <!-- 4. LAYERS                                                             -->
 <!-- ══════════════════════════════════════════════════════════════════════ -->
 <section id="layers" class="space-y-6 pt-8 border-t border-zinc-800">
-    <h2 class="text-2xl font-semibold text-white">4. Layers <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
+    <h2 class="text-xl sm:text-2xl font-semibold text-white">4. Layers <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
     <p class="text-zinc-400">Non-destructive, stackable layers — the backbone of the GracePencil workflow.</p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -604,7 +645,7 @@
 <!-- 5. ANIMATION & KEYS                                                   -->
 <!-- ══════════════════════════════════════════════════════════════════════ -->
 <section id="anim" class="space-y-6 pt-8 border-t border-zinc-800">
-    <h2 class="text-2xl font-semibold text-white">5. Animation &amp; Keys <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
+    <h2 class="text-xl sm:text-2xl font-semibold text-white">5. Animation &amp; Keys <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
     <p class="text-zinc-400">Build frame-by-frame animation and control onion skinning directly from this rollup.</p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -644,12 +685,11 @@
 <!-- 6. EFFECTS                                                            -->
 <!-- ══════════════════════════════════════════════════════════════════════ -->
 <section id="effects" class="space-y-6 pt-8 border-t border-zinc-800">
-    <h2 class="text-2xl font-semibold text-white">6. Effects <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
+    <h2 class="text-xl sm:text-2xl font-semibold text-white">6. Effects <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
     <p class="text-zinc-400">Per-layer visual effects, color overrides, and the Wiggle hand-drawn animation system.</p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        <!-- Drop Shadow -->
         <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700 space-y-3">
             <h3 class="text-base font-semibold text-white flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-teal-400"></span>Drop Shadow
@@ -662,7 +702,6 @@
             </div>
         </div>
 
-        <!-- Outline -->
         <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700 space-y-3">
             <h3 class="text-base font-semibold text-white flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-teal-400"></span>Outline
@@ -675,7 +714,6 @@
             </div>
         </div>
 
-        <!-- Glow -->
         <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700 space-y-3">
             <h3 class="text-base font-semibold text-white flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-teal-400"></span>Glow (Self-Illumination)
@@ -686,7 +724,6 @@
             </div>
         </div>
 
-        <!-- Override Color -->
         <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700 space-y-3">
             <h3 class="text-base font-semibold text-white flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-teal-400"></span>Override Color
@@ -698,7 +735,6 @@
             </div>
         </div>
 
-        <!-- Wiggle -->
         <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700 md:col-span-2 space-y-3">
             <h3 class="text-base font-semibold text-white flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-teal-400"></span>Wiggle (Hand-Drawn Animation)
@@ -711,7 +747,6 @@
             </div>
         </div>
 
-        <!-- Object Tracker -->
         <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700 md:col-span-2 space-y-3">
             <h3 class="text-base font-semibold text-white flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-teal-400"></span>Object Tracker
@@ -734,7 +769,7 @@
 <!-- 7. GRADIENT                                                           -->
 <!-- ══════════════════════════════════════════════════════════════════════ -->
 <section id="gradient" class="space-y-6 pt-8 border-t border-zinc-800">
-    <h2 class="text-2xl font-semibold text-white">7. Gradient <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
+    <h2 class="text-xl sm:text-2xl font-semibold text-white">7. Gradient <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
     <p class="text-zinc-400">Creates and edits gradient fill strokes. Activate the <strong>Gradient</strong> tool then drag in the viewport to place a gradient layer. <em>Shift+drag</em> edits an existing gradient stroke.</p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -780,7 +815,7 @@
 <!-- 8. PALETTE                                                            -->
 <!-- ══════════════════════════════════════════════════════════════════════ -->
 <section id="palette" class="space-y-6 pt-8 border-t border-zinc-800">
-    <h2 class="text-2xl font-semibold text-white">8. Palette <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
+    <h2 class="text-xl sm:text-2xl font-semibold text-white">8. Palette <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
     <p class="text-zinc-400">A persistent colour swatch library that lets you save, organise and quickly apply colours during drawing sessions.</p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -810,7 +845,7 @@
 <!-- 9. QT TOOLBAR                                                         -->
 <!-- ══════════════════════════════════════════════════════════════════════ -->
 <section id="qt-toolbar" class="space-y-6 pt-8 border-t border-zinc-800">
-    <h2 class="text-2xl font-semibold text-white">9. Qt Toolbar</h2>
+    <h2 class="text-xl sm:text-2xl font-semibold text-white">9. Qt Toolbar</h2>
     <p class="text-zinc-400">A compact, floating Qt-based toolbar that gives instant access to the most-used tools without needing to scroll through rollups. Toggle it with <strong>Show Qt Toolbar</strong> in the Display rollup.</p>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -837,7 +872,7 @@
     <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700">
         <h3 class="text-base font-semibold text-white mb-3">Layer Controls</h3>
         <p class="text-sm text-zinc-400 mb-3">The toolbar also exposes the most critical layer operations so you can stay in the viewport:</p>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm text-zinc-300">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-sm text-zinc-300">
             <p><span class="param-badge">Active Layer</span> — A dropdown listing all layers. Select to switch the active drawing layer.</p>
             <p><span class="param-badge">Add Layer</span> — Creates a new layer above the current one.</p>
             <p><span class="param-badge">Visible toggle</span> — Eye icon per layer row; click to show/hide without opening the rollup.</p>
@@ -850,7 +885,7 @@
 <!-- 10. DISPLAY & SETTINGS                                                -->
 <!-- ══════════════════════════════════════════════════════════════════════ -->
 <section id="display" class="space-y-6 pt-8 border-t border-zinc-800 pb-20">
-    <h2 class="text-2xl font-semibold text-white">10. Display &amp; Settings <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
+    <h2 class="text-xl sm:text-2xl font-semibold text-white">10. Display &amp; Settings <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
     <p class="text-zinc-400">Controls the viewport icon and the Qt toolbar visibility, plus global settings.</p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -945,7 +980,7 @@ brushSections.forEach((s, idx) => {
     const header = document.createElement('button');
     header.className = "rollup-header w-full text-left";
     header.innerHTML = `
-        <div class="flex items-center gap-3 text-zinc-300">
+        <div class="flex items-center gap-3 text-zinc-300 flex-wrap">
             <span class="font-semibold">${s.name}</span>
             <div class="flex flex-wrap gap-1">${paramsHtml}</div>
         </div>
@@ -984,6 +1019,39 @@ const observer = new IntersectionObserver(entries => {
     });
 }, { rootMargin: '-30% 0px -60% 0px' });
 sections.forEach(s => observer.observe(s));
+
+// ── Mobile sidebar toggle ────────────────────────────────────────────────
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebar-overlay');
+const openBtn = document.getElementById('sidebar-toggle');
+const closeBtn = document.getElementById('sidebar-close');
+
+function openSidebar() {
+    sidebar.classList.add('open');
+    overlay.classList.add('open');
+    openBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+}
+function closeSidebar() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+    openBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+}
+
+openBtn.addEventListener('click', openSidebar);
+closeBtn.addEventListener('click', closeSidebar);
+overlay.addEventListener('click', closeSidebar);
+
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        if (window.innerWidth < 768) closeSidebar();
+    });
+});
+
+window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) closeSidebar();
+});
 </script>
 </body>
 </html>
