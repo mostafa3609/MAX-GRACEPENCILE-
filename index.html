@@ -121,10 +121,11 @@
         <a href="#layers"         class="nav-link block py-2 px-3 rounded-md">4. Layers</a>
         <a href="#anim"           class="nav-link block py-2 px-3 rounded-md">5. Animation &amp; Keys</a>
         <a href="#effects"        class="nav-link block py-2 px-3 rounded-md">6. Effects</a>
-        <a href="#gradient"       class="nav-link block py-2 px-3 rounded-md">7. Gradient</a>
-        <a href="#palette"        class="nav-link block py-2 px-3 rounded-md">8. Palette</a>
-        <a href="#qt-toolbar"     class="nav-link block py-2 px-3 rounded-md">9. Qt Toolbar</a>
-        <a href="#display"        class="nav-link block py-2 px-3 rounded-md">10. Display &amp; Settings</a>
+        <a href="#stroke-mods"    class="nav-link block py-2 px-3 rounded-md">7. Stroke Modifiers</a>
+        <a href="#gradient"       class="nav-link block py-2 px-3 rounded-md">8. Gradient</a>
+        <a href="#palette"        class="nav-link block py-2 px-3 rounded-md">9. Palette</a>
+        <a href="#qt-toolbar"     class="nav-link block py-2 px-3 rounded-md">10. Qt Toolbar</a>
+        <a href="#display"        class="nav-link block py-2 px-3 rounded-md">11. Display &amp; Settings</a>
     </nav>
 
     <div class="p-4 border-t border-zinc-800 bg-zinc-950/80">
@@ -184,8 +185,8 @@
         </div>
         <div class="bg-zinc-800/80 border border-teal-500/20 p-4 rounded-xl flex flex-col gap-2">
             <svg class="w-6 h-6 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3h6m-6 0a2 2 0 00-2 2v1H5a2 2 0 00-2 2v10a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-2V5a2 2 0 00-2-2M9 3v3m6-3v3"/></svg>
-            <h3 class="text-white font-semibold text-sm">10 Brush Types</h3>
-            <p class="text-xs text-zinc-400">Solid Stroke, Solid Fill, Square, Dots, Grunge, Grain, Marker, Watercolor, Map and Custom Stamp. Each with full width taper control.</p>
+            <h3 class="text-white font-semibold text-sm">8 Brush Types + Presets</h3>
+            <p class="text-xs text-zinc-400">Solid Stroke, Solid Fill, Square, Dots, Grunge, Grain, Map and Custom Stamp shapes, each with full width taper control — plus a saved Preset library (Marker, Watercolor and more) built on top of them via the Brush Picker.</p>
         </div>
         <div class="bg-zinc-800/80 border border-teal-500/20 p-4 rounded-xl flex flex-col gap-2">
             <svg class="w-6 h-6 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3l14 9-14 9V3z"/></svg>
@@ -380,6 +381,30 @@
             </div>
         </div>
     </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bg-zinc-800 rounded-xl p-5 border border-zinc-700 space-y-2">
+            <div class="flex items-center gap-2 mb-1">
+                <span class="w-7 h-7 rounded-lg bg-teal-500/20 flex items-center justify-center text-teal-400 font-bold text-sm">4</span>
+                <h3 class="text-white font-semibold">Gradients</h3>
+            </div>
+            <p class="text-sm text-zinc-400">Selects the placement plane of one or more Gradient-layer strokes by layer index. Move, rotate or scale the gizmo to reposition the gradient ramp in 3D space directly, without touching the Gradient rollup's numeric offsets.</p>
+        </div>
+        <div class="bg-zinc-800 rounded-xl p-5 border border-zinc-700 space-y-2">
+            <div class="flex items-center gap-2 mb-1">
+                <span class="w-7 h-7 rounded-lg bg-teal-500/20 flex items-center justify-center text-teal-400 font-bold text-sm">5</span>
+                <h3 class="text-white font-semibold">Grid</h3>
+            </div>
+            <p class="text-sm text-zinc-400">A single selectable item representing the active drawing grid/plane. Transform it directly in the viewport as an alternative to typing X/Y/Z/Yaw/Pitch values in the Draw Options rollup.</p>
+        </div>
+        <div class="bg-zinc-800 rounded-xl p-5 border border-zinc-700 space-y-2">
+            <div class="flex items-center gap-2 mb-1">
+                <span class="w-7 h-7 rounded-lg bg-teal-500/20 flex items-center justify-center text-teal-400 font-bold text-sm">6</span>
+                <h3 class="text-white font-semibold">Symmetry Center</h3>
+            </div>
+            <p class="text-sm text-zinc-400">A movable pivot point for X/Y/Z symmetry, independent of the world origin or a picked node's pivot. Drag it at this sub-object level to fine-tune the mirror axis without repicking a reference object.</p>
+        </div>
+    </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════════════ -->
@@ -403,7 +428,7 @@
                 </div>
                 <div class="bg-zinc-900 rounded-lg p-3 border border-zinc-700">
                     <p class="text-teal-400 font-semibold mb-1">Select</p>
-                    <p class="text-zinc-400 text-xs">Box-select individual strokes to move, scale or delete them. Supports multi-selection.</p>
+                    <p class="text-zinc-400 text-xs">Box-select individual strokes to move, scale or delete them. Supports multi-selection. Press &amp; hold the tool button for a menu of selection shapes: Rectangle, Ellipse, Lasso or Polygon.</p>
                 </div>
                 <div class="bg-zinc-900 rounded-lg p-3 border border-zinc-700">
                     <p class="text-teal-400 font-semibold mb-1">Smudge</p>
@@ -569,6 +594,23 @@
         </div>
 
         <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700 md:col-span-2 space-y-3">
+            <h3 class="text-base font-semibold text-white">Brush Picker &amp; Presets</h3>
+            <p class="text-sm text-zinc-400">A floating thumbnail window (default hotkey <strong class="text-teal-400">Alt+J</strong>) for browsing every imported/cached brush stamp at a glance, separate from the Brush &amp; Colors rollup's own controls.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-zinc-300">
+                <div class="space-y-1">
+                    <p><span class="param-badge">Thumbnail grid</span> — Click a stamp to make it the active Custom/Stamp or Map brush image.</p>
+                    <p><span class="param-badge">Size / Hardness</span> — Quick sliders for brush radius and edge softness without opening the full rollup.</p>
+                    <p><span class="param-badge">Start Width / End Width</span> — Taper sliders for the current stroke, mirrored from the Width Profile controls.</p>
+                </div>
+                <div class="space-y-1">
+                    <p><span class="param-badge">Brush Presets</span> — The full brush configuration (type, width, spacing, taper, smoothing, pressure, map path/tiling) can be saved, updated, deleted and re-applied from the Presets tab of Settings, and bound to hotkey slots.</p>
+                    <p><span class="param-badge">Tool Presets</span> — Captures drawing-plane, surface, fill, onion and symmetry settings as a separate reusable preset category.</p>
+                    <p><span class="param-badge">Import / Export</span> — Presets are stored in <code class="text-teal-400 bg-zinc-900 px-1 rounded">GracePencil_Presets.ini</code> and can be shared between machines.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700 md:col-span-2 space-y-3">
             <h3 class="text-base font-semibold text-white">Custom Stamp Options</h3>
             <p class="text-sm text-zinc-400">Fine-grained control over how the stamp image is distributed along the stroke path. Visible only when Brush Type is <em>Custom / Stamp</em> or <em>Map</em>.</p>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm text-zinc-300">
@@ -625,7 +667,8 @@
             <div>
                 <h3 class="text-base font-semibold text-white mb-2">Blend Mode &amp; Opacity</h3>
                 <div class="text-sm text-zinc-300 space-y-1">
-                    <p><span class="param-badge">Blend</span> — Compositing mode for this layer: <em>Regular, Multiply, Screen, Overlay, Add, Subtract,</em> and more.</p>
+                    <p><span class="param-badge">Blend</span> — Full set of <strong class="text-white">27 Photoshop-standard blend modes</strong>, grouped the same way Photoshop groups them: Normal/Dissolve; Darken, Multiply, Color Burn, Linear Burn, Darker Color; Lighten, Screen, Color Dodge, Linear Dodge (Add), Lighter Color; Overlay, Soft Light, Hard Light, Vivid Light, Linear Light, Pin Light, Hard Mix; Difference, Exclusion, Subtract, Divide; Hue, Saturation, Color, Luminosity.</p>
+                    <p class="text-xs text-zinc-500">Each layer's colour is composited against the merged colour of the visible layers beneath it (their own blend modes and opacities folded in first), so the result matches between viewport and final render. Because this is a layer-colour approximation rather than true pixel-level image compositing, results are most predictable on Paint, Shape and Solid Fill layers; Gradient/Map/Stamp layers currently blend using a representative fallback colour.</p>
                     <p><span class="param-badge">Opacity</span> — Overall layer opacity (0–1). Multiplies with individual stroke opacity.</p>
                 </div>
             </div>
@@ -633,8 +676,9 @@
             <div>
                 <h3 class="text-base font-semibold text-white mb-2">Clipping Mask</h3>
                 <div class="text-sm text-zinc-300 space-y-1">
-                    <p><span class="param-badge">Clip to</span> — Selects a layer whose strokes act as the alpha mask for this layer. Only pixels inside the base layer's painted area will be visible.</p>
+                    <p><span class="param-badge">Clip to</span> — Selects a layer — or an entire <strong>group folder</strong> — whose painted area acts as the alpha mask for this layer. Only pixels inside the mask's painted shape will be visible.</p>
                     <p><span class="param-badge">Inv</span> — Inverts the clipping mask (shows outside the base layer instead).</p>
+                    <p class="text-xs text-zinc-500">The mask is rasterized as capsule shapes along every stroke segment (so no gaps appear regardless of brush spacing) at 512×512 resolution, and now correctly fills the interior of closed strokes, Fill-Loop strokes and closed Shape-tool strokes — a solid filled circle used as a mask clips as a solid disc, not just its outline. Gradient layers can be masked too (their fill quad subdivides into a 16×16 grid so the clip follows the mask shape instead of showing all-or-nothing). If the masking layer has Object Tracker enabled, the mask automatically re-rasterizes as the tracked object moves.</p>
                 </div>
             </div>
         </div>
@@ -766,10 +810,64 @@
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════════════ -->
-<!-- 7. GRADIENT                                                           -->
+<!-- 7. STROKE MODIFIERS                                                   -->
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<section id="stroke-mods" class="space-y-6 pt-8 border-t border-zinc-800">
+    <h2 class="text-xl sm:text-2xl font-semibold text-white">7. Stroke Modifiers <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
+    <p class="text-zinc-400">Non-destructive, per-layer modifiers that reshape or generate strokes automatically, without hand-drawing every line.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700 space-y-3">
+            <h3 class="text-base font-semibold text-white">Length</h3>
+            <p class="text-sm text-zinc-400">Shrinks or extends every stroke on the active layer from its start and/or end, without redrawing.</p>
+            <div class="text-sm text-zinc-300 space-y-1">
+                <p><span class="param-badge">Enable</span> — Turns the Length modifier on for this layer.</p>
+                <p><span class="param-badge">Mode</span> — <em>Absolute</em>: Start/End are scene-unit distances trimmed or added at each tip. <em>Relative</em>: Start/End are treated as a percentage of each stroke's own length.</p>
+                <p><span class="param-badge">Start / End</span> — Amount to trim (negative) or extend (positive) at the stroke's start and end points (−10000…10000).</p>
+            </div>
+        </div>
+
+        <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700 space-y-3">
+            <h3 class="text-base font-semibold text-white">Multiple Strokes</h3>
+            <p class="text-sm text-zinc-400">Generates offset parallel copies of every stroke on the layer — useful for sketchy, hand-inked line multiplication or comic-style speed lines.</p>
+            <div class="text-sm text-zinc-300 space-y-1">
+                <p><span class="param-badge">Enable</span> — Turns on the duplicate-strokes effect.</p>
+                <p><span class="param-badge">Count</span> — Number of parallel copies to generate (1–20).</p>
+                <p><span class="param-badge">Distance</span> — Spacing between each successive copy in scene units.</p>
+                <p><span class="param-badge">Fade Thickness</span> — Progressively thins each successive copy.</p>
+                <p><span class="param-badge">Fade Opacity</span> — Progressively fades the opacity of each successive copy.</p>
+            </div>
+        </div>
+
+        <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700 md:col-span-2 space-y-3">
+            <h3 class="text-base font-semibold text-white">Line Art</h3>
+            <p class="text-sm text-zinc-400">Automatically extracts feature-line strokes from a picked 3D mesh — a fast way to get a hand-drawn-looking outline pass over real geometry.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-zinc-300">
+                <div class="space-y-1">
+                    <p><span class="param-badge">Pick Node</span> — Selects the source mesh to analyze for feature lines.</p>
+                    <p><span class="param-badge">Silhouette</span> — Extracts the outer contour edges of the mesh as seen from the current view.</p>
+                    <p><span class="param-badge">Crease</span> — Extracts edges where adjacent face angles exceed the <span class="param-badge">Angle</span> threshold (1°–179°).</p>
+                    <p><span class="param-badge">Border</span> — Extracts open mesh boundary edges (holes, open edges).</p>
+                    <p><span class="param-badge">Material ID</span> — Extracts edges where the Material ID changes between adjacent faces.</p>
+                </div>
+                <div class="space-y-1">
+                    <p><span class="param-badge">Width</span> — Stroke width applied to the generated line-art strokes.</p>
+                    <p><span class="param-badge">Bake</span> — Runs the extraction once and writes the result as ordinary editable strokes on the layer.</p>
+                    <p><span class="param-badge">Live</span> — Keeps re-baking automatically as the source mesh (or the viewport camera, via orbit/pan/zoom) changes, cleanly replacing only its own previously-generated strokes each time.</p>
+                    <p><span class="param-badge">Node label</span> — Shows the name of the currently picked source node ("None" if unassigned).</p>
+                </div>
+            </div>
+            <p class="text-xs text-zinc-500 mt-2">Line Art is a per-frame snapshot bake, not a render-time effect — visibility culling and hidden-line removal are not evaluated, so review baked results in busy scenes before relying on them.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════ -->
+<!-- 8. GRADIENT                                                           -->
 <!-- ══════════════════════════════════════════════════════════════════════ -->
 <section id="gradient" class="space-y-6 pt-8 border-t border-zinc-800">
-    <h2 class="text-xl sm:text-2xl font-semibold text-white">7. Gradient <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
+    <h2 class="text-xl sm:text-2xl font-semibold text-white">8. Gradient <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
     <p class="text-zinc-400">Creates and edits gradient fill strokes. Activate the <strong>Gradient</strong> tool then drag in the viewport to place a gradient layer. <em>Shift+drag</em> edits an existing gradient stroke.</p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -812,10 +910,10 @@
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════════════ -->
-<!-- 8. PALETTE                                                            -->
+<!-- 9. PALETTE                                                            -->
 <!-- ══════════════════════════════════════════════════════════════════════ -->
 <section id="palette" class="space-y-6 pt-8 border-t border-zinc-800">
-    <h2 class="text-xl sm:text-2xl font-semibold text-white">8. Palette <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
+    <h2 class="text-xl sm:text-2xl font-semibold text-white">9. Palette <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
     <p class="text-zinc-400">A persistent colour swatch library that lets you save, organise and quickly apply colours during drawing sessions.</p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -842,10 +940,10 @@
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════════════ -->
-<!-- 9. QT TOOLBAR                                                         -->
+<!-- 10. QT TOOLBAR                                                        -->
 <!-- ══════════════════════════════════════════════════════════════════════ -->
 <section id="qt-toolbar" class="space-y-6 pt-8 border-t border-zinc-800">
-    <h2 class="text-xl sm:text-2xl font-semibold text-white">9. Qt Toolbar</h2>
+    <h2 class="text-xl sm:text-2xl font-semibold text-white">10. Qt Toolbar</h2>
     <p class="text-zinc-400">A compact, floating Qt-based toolbar that gives instant access to the most-used tools without needing to scroll through rollups. Toggle it with <strong>Show Qt Toolbar</strong> in the Display rollup.</p>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -882,10 +980,10 @@
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════════════ -->
-<!-- 10. DISPLAY & SETTINGS                                                -->
+<!-- 11. DISPLAY & SETTINGS                                                -->
 <!-- ══════════════════════════════════════════════════════════════════════ -->
 <section id="display" class="space-y-6 pt-8 border-t border-zinc-800 pb-20">
-    <h2 class="text-xl sm:text-2xl font-semibold text-white">10. Display &amp; Settings <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
+    <h2 class="text-xl sm:text-2xl font-semibold text-white">11. Display &amp; Settings <span class="text-sm font-normal text-zinc-500 ml-2">Rollup</span></h2>
     <p class="text-zinc-400">Controls the viewport icon and the Qt toolbar visibility, plus global settings.</p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -905,36 +1003,42 @@
             <h3 class="text-base font-semibold text-white">Toolbar &amp; Settings</h3>
             <div class="text-sm text-zinc-300 space-y-1">
                 <p><span class="param-badge">Show Qt Toolbar</span> — Toggles the floating Qt toolbar on or off. The toolbar position is saved per-session.</p>
-                <p><span class="param-badge">Settings…</span> — Opens the GracePencil Settings dialog where you can configure:</p>
+                <p><span class="param-badge">Settings…</span> — Opens the GracePencil Settings dialog (also bound to <strong class="text-teal-400">F12</strong>), with two tabs:</p>
                 <ul class="list-disc list-inside ml-4 text-xs text-zinc-400 space-y-0.5">
-                    <li>Default brush parameters for new sessions</li>
-                    <li>Viewport drawing quality</li>
-                    <li>Undo stack depth</li>
-                    <li>Material generation options</li>
-                    <li>Keyboard shortcut bindings</li>
+                    <li><strong class="text-zinc-300">Presets</strong> — Browse, add, update, delete, import and export Brush and Tool presets (see the Brush &amp; Colors rollup), and capture the current tool state as a new preset.</li>
+                    <li><strong class="text-zinc-300">Shortcuts</strong> — View and rebind every action, capture a new key combination, or clear/reset a binding to default. Bindings are saved to <code class="text-teal-400 bg-zinc-900 px-1 rounded">GracePencil_Presets.ini</code> and only fire while a GracePencil tool/object is active.</li>
                 </ul>
             </div>
         </div>
+    </div>
+
+    <div class="bg-teal-500/10 border border-teal-500/20 rounded-xl p-5 text-sm text-zinc-300">
+        <p><strong class="text-teal-400">Floating rollups everywhere:</strong> every rollup in the Modify panel — not just Layers — has a pop-out button that detaches it into its own always-on-top window, which can be dragged to a second monitor and docked back at any time.</p>
     </div>
 
     <!-- Keyboard Shortcuts Reference -->
     <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700">
         <h3 class="text-base font-semibold text-white mb-4">Keyboard Shortcut Reference</h3>
         <div class="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-2 text-sm">
-            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Draw</span><kbd class="text-teal-400 font-mono">D</kbd></div>
-            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Erase</span><kbd class="text-teal-400 font-mono">E</kbd></div>
-            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Select</span><kbd class="text-teal-400 font-mono">S</kbd></div>
-            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Smudge</span><kbd class="text-teal-400 font-mono">M</kbd></div>
-            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Relax</span><kbd class="text-teal-400 font-mono">R</kbd></div>
-            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Bucket Fill</span><kbd class="text-teal-400 font-mono">B</kbd></div>
-            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Undo Stroke</span><kbd class="text-teal-400 font-mono">Ctrl+Z</kbd></div>
+            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Draw</span><kbd class="text-teal-400 font-mono">Alt+B</kbd></div>
+            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Erase</span><kbd class="text-teal-400 font-mono">Alt+E</kbd></div>
+            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Select</span><kbd class="text-teal-400 font-mono">Alt+S</kbd></div>
+            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Bucket Fill</span><kbd class="text-teal-400 font-mono">Alt+G</kbd></div>
+            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Smudge</span><kbd class="text-teal-400 font-mono">Alt+M</kbd></div>
+            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Relax</span><kbd class="text-teal-400 font-mono">Alt+R</kbd></div>
             <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Brush Size +</span><kbd class="text-teal-400 font-mono">]</kbd></div>
             <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Brush Size −</span><kbd class="text-teal-400 font-mono">[</kbd></div>
-            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Add Keyframe</span><kbd class="text-teal-400 font-mono">I</kbd></div>
-            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Prev Key</span><kbd class="text-teal-400 font-mono">,</kbd></div>
-            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Next Key</span><kbd class="text-teal-400 font-mono">.</kbd></div>
+            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Open Brush Picker</span><kbd class="text-teal-400 font-mono">Alt+J</kbd></div>
+            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Next Layer</span><kbd class="text-teal-400 font-mono">Ctrl+↓</kbd></div>
+            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Prev Layer</span><kbd class="text-teal-400 font-mono">Ctrl+↑</kbd></div>
+            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Next Key</span><kbd class="text-teal-400 font-mono">→</kbd></div>
+            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Prev Key</span><kbd class="text-teal-400 font-mono">←</kbd></div>
+            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Toggle Auto Key</span><kbd class="text-teal-400 font-mono">Alt+N</kbd></div>
+            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Toggle Onion Skin</span><kbd class="text-teal-400 font-mono">Alt+O</kbd></div>
+            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Open Settings</span><kbd class="text-teal-400 font-mono">F12</kbd></div>
+            <div class="flex justify-between border-b border-zinc-700/50 pb-1"><span class="text-zinc-400">Undo (native Max)</span><kbd class="text-teal-400 font-mono">Ctrl+Z</kbd></div>
         </div>
-        <p class="text-xs text-zinc-500 mt-3">Shortcuts are configurable via Settings… → Keyboard tab.</p>
+        <p class="text-xs text-zinc-500 mt-3">These are the only actions that ship with a default binding. Around 60 other actions — Gradient tool, layer visibility/lock toggles, add/duplicate/delete keyframe, symmetry axes, plane-view switching, brush opacity, and the preset-apply slots — exist and are fully usable, but ship <strong>unbound</strong>; assign them yourself in Settings… (F12) → Shortcuts tab. All bindings are rebindable there.</p>
     </div>
 </section>
 
@@ -951,7 +1055,7 @@ const brushSections = [
     },
     {
         name: "Brush Type",
-        params: ["Solid Stroke","Solid Fill","Square Strokes","Dots Stroke","Grunge","Grain","Marker","Watercolor","Map","Custom / Stamp"],
+        params: ["Solid Stroke","Solid Fill","Square Strokes","Dots Stroke","Grunge","Grain","Map","Custom / Stamp"],
         desc: `Selects the rendering algorithm for new strokes:<br>
         <strong>Solid Stroke</strong> — filled polygon ribbon following the stroke path.<br>
         <strong>Solid Fill</strong> — fully filled shape using the fill color, no visible edge stroke.<br>
@@ -959,10 +1063,9 @@ const brushSections = [
         <strong>Dots Stroke</strong> — distributes circular dot shapes along the path (controlled by Spacing).<br>
         <strong>Grunge</strong> — procedural rough texture applied to the stroke silhouette.<br>
         <strong>Grain</strong> — fine noise grain overlay on the stroke for a traditional media feel.<br>
-        <strong>Marker</strong> — flat, semi-opaque coverage mimicking a felt-tip marker.<br>
-        <strong>Watercolor</strong> — soft, wet-edge bleeding stroke with variable opacity.<br>
         <strong>Map</strong> — tiles a BitmapTex across the stroke surface.<br>
-        <strong>Custom / Stamp</strong> — repeats a user-supplied PNG image (stamp) along the stroke path with full Custom Stamp Options control.`
+        <strong>Custom / Stamp</strong> — repeats a user-supplied PNG image (stamp) along the stroke path with full Custom Stamp Options control.<br><br>
+        <em>Marker and Watercolor are no longer separate brush shapes</em> — they're now ready-made <strong>Brush Presets</strong> (a Solid Stroke recipe with a specific width/spacing/opacity setup) reachable from the "- Brush Presets -" combo or the Brush Picker, not this Type list.`
     },
     {
         name: "Spacing & Dot Shape",
